@@ -1,0 +1,135 @@
+This setup is done in the macbook.
+
+STEP 1: brew install --cask docker
+validation: which brew
+https://formulae.brew.sh/cask/docker
+STEP 2: kubectl is already installed
+validation: which kubectl
+STEP3: Install kind using brew
+https://formulae.brew.sh/formula/kind
+
+
+ERROR MESSAGE:
+-------------------------------
+ERROR1
+-------------------------------
+in22898717@INML7RV4FCP7 3letsbuildapod % kind delete cluster --name=kind
+Deleting cluster "kind" ...
+ERROR: failed to delete cluster "kind": error listing nodes: failed to list nodes: command "docker ps -a --filter label=io.x-k8s.kind.cluster=kind --format '{{.Names}}'" failed with error: exit status 1
+Command Output: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+in22898717@INML7RV4FCP7 3letsbuildapod % docker info
+Client:
+ Version:    26.0.0
+ Context:    default
+ Debug Mode: false
+
+Server:
+ERROR: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+errors pretty printing info
+
+in22898717@INML7RV4FCP7 3letsbuildapod % docker ps
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+in22898717@INML7RV4FCP7 3letsbuildapod % 
+
+-------------------------------
+RESOLUTION1
+------------------------------
+Install docker using the desktop app:
+https://docs.docker.com/desktop/install/mac-install/
+Download the installer using the download buttons at the top of the page, or from the release notes.
+Double-click Docker.dmg to open the installer, then drag the Docker icon to the Applications folder. By default, Docker Desktop is installed at /Applications/Docker.app.
+Double-click Docker.app in the Applications folder to start Docker.
+The Docker menu displays the Docker Subscription Service Agreement.
+Select Accept to continue.
+
+Client:
+ Version:    26.0.0
+ Context:    desktop-linux
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.13.1-desktop.1
+    Path:     /Users/in22898717/.docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.26.1-desktop.1
+    Path:     /Users/in22898717/.docker/cli-plugins/docker-compose
+  debug: Get a shell into any image or container. (Docker Inc.)
+    Version:  0.0.27
+    Path:     /Users/in22898717/.docker/cli-plugins/docker-debug
+  dev: Docker Dev Environments (Docker Inc.)
+    Version:  v0.1.2
+    Path:     /Users/in22898717/.docker/cli-plugins/docker-dev
+  extension: Manages Docker extensions (Docker Inc.)
+    Version:  v0.2.23
+    Path:     /Users/in22898717/.docker/cli-plugins/docker-extension
+  feedback: Provide feedback, right in your terminal! (Docker Inc.)
+    Version:  v1.0.4
+    Path:     /Users/in22898717/.docker/cli-plugins/docker-feedback
+  init: Creates Docker-related starter files for your project (Docker Inc.)
+    Version:  v1.1.0
+    Path:     /Users/in22898717/.docker/cli-plugins/docker-init
+  sbom: View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc.)
+    Version:  0.6.0
+    Path:     /Users/in22898717/.docker/cli-plugins/docker-sbom
+  scout: Docker Scout (Docker Inc.)
+    Version:  v1.6.3
+    Path:     /Users/in22898717/.docker/cli-plugins/docker-scout
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 0
+ Server Version: 26.0.0
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: ae07eda36dd25f8a1b98dfbf587313b99c0190bb
+ runc version: v1.1.12-0-g51d5e94
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: unconfined
+  cgroupns
+ Kernel Version: 6.6.22-linuxkit
+ Operating System: Docker Desktop
+ OSType: linux
+ Architecture: aarch64
+ CPUs: 10
+ Total Memory: 7.657GiB
+ Name: docker-desktop
+ ID: 62930574-bdb9-4656-8cb1-4a0c90a05fbc
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ HTTP Proxy: http.docker.internal:3128
+ HTTPS Proxy: http.docker.internal:3128
+ No Proxy: hubproxy.docker.internal
+ Labels:
+  com.docker.desktop.address=unix:///Users/in22898717/Library/Containers/com.docker.docker/Data/docker-cli.sock
+ Experimental: false
+ Insecure Registries:
+  hubproxy.docker.internal:5555
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+WARNING: daemon is not using the default seccomp profile
+
+in22898717@INML7RV4FCP7 .kube % docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+in22898717@INML7RV4FCP7 .kube % 
